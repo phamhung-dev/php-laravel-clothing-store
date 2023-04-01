@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->decimal('subtotal', $precision = 10, $scale = 0);
             $table->decimal('total', $precision = 10, $scale = 0);
-            $table->unsignedInteger('coupon_id');
+            $table->unsignedInteger('coupon_id')->nullable();;
             $table->foreign('coupon_id')->references('id')->on('coupons')->onUpdate('cascade');
             $table->unsignedInteger('payment_id');
             $table->foreign('payment_id')->references('id')->on('payments')->onUpdate('cascade');
-            $table->string('note', 512);
+            $table->string('note', 512)->nullable();;
             $table->string('apartment_number', 256);
             $table->string('street', 256);
             $table->string('ward', 256);

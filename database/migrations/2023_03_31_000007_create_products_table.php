@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('weight', 32);
             $table->string('dimensions', 128);
             $table->string('materials', 512);
-            $table->string('other_info', 512);
+            $table->string('other_info', 512)->nullable();
             $table->decimal('import_price', $precision = 10, $scale = 0);
             $table->decimal('sell_price', $precision = 10, $scale = 0);
             $table->tinyInteger('discount_percent');

@@ -12,9 +12,9 @@ class Role extends Model
     protected $dateFormat = 'Y-m-d';
     protected $fillable = ['name', 'description'];
 
-    // get list role admin users
-    public function roleAdminUsers()
+    // get list role users
+    public function roleUsers()
     {
-        return $this->hasMany(RoleAdminUser::class);
+        return $this->hasMany(RoleUser::class);
     }
 }
