@@ -1,6 +1,6 @@
 @extends('admin.layouts.default')
 
-@section('title', 'Order list')
+@section('title', 'Admin list')
 
 @section('header_optional')
 <!-- No Extra plugin used -->
@@ -14,56 +14,65 @@
     <div class="content">
         <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
             <div>
-                <h1>All order</h1>
+                <h1>All Admin</h1>
                 <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                    <span><i class="mdi mdi-chevron-right"></i></span>Order Details
+                    <span><i class="mdi mdi-chevron-right"></i></span>Admins
                 </p>
+            </div>
+            <div>
+                <a href="/admin/admin-user/create" class="btn btn-primary"> Add new</a>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card card-default">
                     <div class="card-body">
-                        @if (session('error'))
-                        <div class="alert alert-danger text-center">{{ session('error') }}</div>
-                        @endif
                         <div class="">
                             <div id="responsive-data-table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                 <table id="responsive-data-table" class="table dataTable no-footer" style="width:100%" aria-describedby="responsive-data-table_info">
                                     <thead>
                                         <tr>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 39.6875px;">ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="User name: activate to sort column ascending" style="width: 180.0977px;">User name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Total: activate to sort column ascending" style="width: 99.062px;">Total</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Coupon: activate to sort column ascending" style="width: 118.672px;">Coupon</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Payment: activate to sort column ascending" style="width: 118.672px;">Payment</th>
+                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Img: activate to sort column ascending" style="width: 99.062px;">Avatar</th>
+                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 180.0977px;">Full name</th>
+                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 118.672px;">Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Telephone: activate to sort column ascending" style="width: 118.672px;">Telephone</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 118.672px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Is admin: activate to sort column ascending" style="width: 104.375px;">Is admin</th>
+                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Is locked: activate to sort column ascending" style="width: 104.375px;">Is locked</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 107.109px;">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($orderDetails as $orderDetail)
+                                        
+                                        @foreach ($users as $user)
                                         <tr class="odd">
-                                            <td class="sorting_1">{{$orderDetail->id}}</td>
-                                            <td>{{$orderDetail->User->first_name.' '.$orderDetail->User->last_name}}</td>
-                                            <td>@money($orderDetail->total)</td>
-                                            <td>{{$orderDetail->coupon_id ? $orderDetail->Coupon->discount_percent : 0}}%</td>
-                                            <td>{{$orderDetail->Payment->name}}</td>
-                                            <td>{{$orderDetail->telephone}}</td>
+                                            <td class="sorting_1">{{$user->id}}</td>
                                             <td>
-                                                @if($orderDetail->status == 0)
-                                                <span class="badge badge-danger">Canceled</span>
-                                                @elseif($orderDetail->status == 1)
-                                                <span class="badge badge-warning">Shipping</span>
+                                                @if($user->avatar != null)
+                                                <img class="cat-thumb" src="data:image/png;base64, {{$user->avatar}}" alt="img">
                                                 @else
-                                                <span class="badge badge-success">Completed</span>
+                                                <img class="cat-thumb" src="{{asset('web/img/common/avatar.png')}}" alt="img">
+                                                @endif
+                                            </td>
+                                            <td>{{$user->first_name.' '.$user->last_name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->telephone}}</td>
+                                            <td>
+                                                @if($user->is_admin == 1)
+                                                <span class="badge badge-success">admin</span>
+                                                @else
                                                 @endif
                                             </td>
                                             <td>
-                                                <div class="btn-group mb-1">
-                                                    <a href="{{ route('admin.order.edit', ['id' => $orderDetail->id]) }}" class="btn btn-outline-success">Info</a>
+                                                @if($user->is_locked == 1)
+                                                <span class="badge badge-danger">locked</span>
+                                                @else
+                                                @endif
+                                            </td>
+                                            <td>
+                                            <div class="btn-group mb-1">
+                                                <a href="{{ route('admin.adminUser.edit', ['user' => $user->id]) }}" class="btn btn-outline-success">Edit</a>
                                                 </div>
                                             </td>
                                         </tr>

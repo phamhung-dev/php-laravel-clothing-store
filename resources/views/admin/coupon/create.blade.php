@@ -30,6 +30,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
+                        @if (session('error'))
+                        <div class="alert alert-danger text-center">{{ session('error') }}</div>
+                        @endif
                         <form method="POST" action="{{route('admin.coupon.create.submit')}}" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             <div class="col-lg-8">
@@ -45,7 +48,7 @@
                                         <div class="col-md-6">
                                             <label for="discountPercent" class="form-label">Discount
                                                 percent</label>
-                                            <input type="number" class="form-control" placeholder="discountPercent" value="{{ old('discount_percent') }}" name="discount_percent" min="0">
+                                            <input type="number" class="form-control" placeholder="Discount Percent" value="{{ old('discount_percent') }}" name="discount_percent" min="0">
                                             @error('discount_percent')
                                             <p class="text-danger">{{ $message }}</p>
                                             @enderror

@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav">
                 <!-- User Account -->
                 <li class="dropdown user-menu">
-                    <a href="/admin/my-account">
+                    <a href="/admin/admin-user/profile">
                         <i class="mdi mdi-account"></i> My Profile
                     </a>
                 </li>

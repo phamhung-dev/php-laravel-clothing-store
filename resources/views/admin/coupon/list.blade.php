@@ -81,10 +81,10 @@
 @section('footer_optional')
 <!-- Datatables -->
 <script src="{{asset('admin/plugins/data-tables/jquery.datatables.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <!-- Option Switcher -->
-<script th:src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
+<script src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
 @endsection
 
 

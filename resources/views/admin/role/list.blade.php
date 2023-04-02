@@ -20,7 +20,7 @@
                 </p>
             </div>
             <div>
-                <a href="/admin/coupon/add" class="btn btn-primary"> Add new</a>
+                <a href="/admin/role/create" class="btn btn-primary"> Add new</a>
             </div>
         </div>
         <div class="row">
@@ -49,12 +49,14 @@
                                             <td>{{$role->User->first_name.' '.$role->User->last_name}}</td>
                                             <td>{{$role->Role->name}}</td>
                                             <td>{{$role->created_at}}</td>
-                                            <td>{{$role->updated_at}}</td>dif
+                                            <td>{{$role->updated_at}}</td>
                                             </td>
                                             <td>
-                                                <div class="btn-group mb-1">
-                                                    <a href="#" class="btn btn-outline-warning">Delete</a>
-                                                </div>
+                                                <form method="POST" action="{{ route('admin.role.destroy', [$role->User->id, $role->Role->id]) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-outline-warning" type="submit">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -74,10 +76,10 @@
 @section('footer_optional')
 <!-- Datatables -->
 <script src="{{asset('admin/plugins/data-tables/jquery.datatables.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <!-- Option Switcher -->
-<script th:src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
+<script src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
 @endsection
 
 

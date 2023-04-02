@@ -29,7 +29,6 @@
                     <div class="card-body">
                         <div class="">
                             <div id="responsive-data-table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-
                                 <table id="responsive-data-table" class="table dataTable no-footer" style="width:100%" aria-describedby="responsive-data-table_info">
                                     <thead>
                                         <tr>
@@ -38,13 +37,13 @@
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 180.0977px;">Full name</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 118.672px;">Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Telephone: activate to sort column ascending" style="width: 118.672px;">Telephone</th>
-                                            <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Is admin: activate to sort column ascending" style="width: 104.375px;">Is admin</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Is locked: activate to sort column ascending" style="width: 104.375px;">Is locked</th>
                                             <th class="sorting" tabindex="0" aria-controls="responsive-data-table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 107.109px;">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                        
                                         @foreach ($users as $user)
                                         <tr class="odd">
                                             <td class="sorting_1">{{$user->id}}</td>
@@ -63,16 +62,10 @@
                                                 <span class="badge badge-success">admin</span>
                                                 @else
                                                 @endif
-                                            </td>
+                                            </td>                                        
                                             <td>
-                                                @if($user->is_locked == 1)
-                                                <span class="badge badge-danger">locked</span>
-                                                @else
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <div class="btn-group mb-1">
-                                                    <a href="#" class="btn btn-outline-success">Edit</a>
+                                            <div class="btn-group mb-1">
+                                                    <a href="{{ route('admin.user.info', ['id' => $user->id]) }}" class="btn btn-outline-success">Info</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -93,10 +86,10 @@
 @section('footer_optional')
 <!-- Datatables -->
 <script src="{{asset('admin/plugins/data-tables/jquery.datatables.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
-<script th:src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.bootstrap5.min.js')}}"></script>
+<script src="{{asset('admin/plugins/data-tables/datatables.responsive.min.js')}}"></script>
 <!-- Option Switcher -->
-<script th:src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
+<script src="{{asset('admin/plugins/options-sidebar/optionswitcher.js')}}"></script>
 @endsection
 
 

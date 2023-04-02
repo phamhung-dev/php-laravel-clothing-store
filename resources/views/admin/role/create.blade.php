@@ -15,7 +15,7 @@
                 </p>
             </div>
             <div>
-                <a href="/admin/coupon" class="btn btn-primary"> View All
+                <a href="/admin/role" class="btn btn-primary"> View All
                 </a>
             </div>
         </div>
@@ -29,14 +29,17 @@
                 </div>
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form method="POST" action="/admin/role/create/submit" class="row g-3" enctype="multipart/form-data">
+                        @if (session('error'))
+                        <div class="alert alert-danger text-center">{{ session('error') }}</div>
+                        @endif
+                        <form method="POST" action="/admin/role/create" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             <div class="col-lg-8">
                                 <div class="ec-vendor-upload-detail">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="color" class="form-label"> User Name</label>
-                                            <select class="form-select" name="product_category_id">
+                                            <select class="form-select" name="user_id">
                                                 @foreach ($users as $user)
                                                 <option value="{{$user->id}}" selected="0">
                                                     {{$user->first_name.' '.$user->last_name}}
@@ -46,7 +49,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="discountPercent" class="form-label">Role</label>
-                                            <select class="form-select" name="product_category_id">
+                                            <select class="form-select" name="role_id">
                                                 @foreach ($roles as $role)
                                                 <option value="{{$role->id}}" selected="0">
                                                     {{$role->name}}
