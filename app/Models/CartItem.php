@@ -25,4 +25,26 @@ class CartItem extends Model
     {
         return $this->belongsTo(ProductInventory::class);
     }
+
+    // Set the keys for a save update query
+    protected function setKeysForSaveQuery($query)
+    {
+        $query->where('user_id', '=', $this->getAttribute('user_id'))
+            ->where('product_inventory_id', '=', $this->getAttribute('product_inventory_id'));
+        return $query;
+    }
+    // Get the primary key value for a save query.
+    protected function getKeyForSaveQuery()
+    {
+        $keys = $this->getKeyName();
+        if (!is_array($keys)) {
+            return $this->getAttribute($keys);
+        }
+        foreach ($keys as $keyName) {
+            if (is_null($this->getAttribute($keyName))) {
+                return;
+            }
+        }
+        return $keys;
+    }
 }

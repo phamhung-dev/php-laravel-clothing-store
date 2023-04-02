@@ -28,4 +28,23 @@ class Product extends Model
     {
         return $this->hasMany(Wishlist::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function discountPrice()
+    {
+        return $this->sell_price * (1 - $this->discount_percent / 100.0);
+    }
+
+    public function gender(){
+        switch($this->gender){
+            case 0:
+                return 'Female';
+            case 1:
+                return 'Male';
+        }
+    }
 }

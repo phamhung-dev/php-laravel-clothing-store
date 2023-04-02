@@ -26,4 +26,27 @@ class RoleUser extends Model
     {
         return $this->belongsTo(Role::class);
     }
+
+    // Set the keys for a save update query
+    protected function setKeysForSaveQuery($query)
+    {
+        $query->where('user_id', '=', $this->getAttribute('user_id'))
+            ->where('role_id', '=', $this->getAttribute('role_id'));
+        return $query;
+    }
+
+    // Get the primary key value for a save query.
+    protected function getKeyForSaveQuery()
+    {
+        $keys = $this->getKeyName();
+        if (!is_array($keys)) {
+            return $this->getAttribute($keys);
+        }
+        foreach ($keys as $keyName) {
+            if (is_null($this->getAttribute($keyName))) {
+                return;
+            }
+        }
+        return $keys;
+    }
 }

@@ -28,24 +28,26 @@
                 <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
                     <div class="account_form">
                         <h3>Login</h3>
-                        @if ($errors->any())
+                        @error('account')
                         <div class="alert alert-danger mt-4">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                            {{ $message }}
                         </div>
-                        @endif
+                        @enderror
                         <form method="POST" action="{{ route('login.submit') }}">
                             @csrf
                             <div class="default-form-box">
                                 <label for="email">Email <span>*</span></label>
                                 <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" required autofocus>
+                                @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                @enderror  
                             </div>
                             <div class="default-form-box">
                                 <label for="password">Password <span>*</span></label>
                                 <input type="password" class="form-control" name="password" id="password" required>
+                                @error('password')
+                                        <p class="text-danger">{{ $message }}</p>
+                                @enderror  
                             </div>
                             <div class="remember_area pt-0">
                                 <label class="checkbox-default">

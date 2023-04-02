@@ -36,4 +36,28 @@ class OrderDetail extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function ship_address()
+    {
+        return trim($this->apartment_number . ', ' . $this->street . ', ' . $this->ward . ', ' . $this->district . ', ' . $this->city);
+    }
+
+    public function discountTotal(){
+        if($this->coupon_id){
+            return $this->subtotal * $this->coupon()->first()->discount_percent / 100.0;
+        }
+        return 0;
+    }
+
+    public function status()
+    {
+        switch ($this->status) {
+            case 0:
+                return 'Canceled';
+            case 1:
+                return 'Pending';
+            case 2:
+                return 'Completed';
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ AuthController, ApplicationController, UserController };
+use App\Http\Controllers\{ AuthController, ApplicationController, UserController, ProductController, OrderDetailController, CartItemController };
 use App\Http\Middleware\UserAuthenticate;
 
 /*
@@ -15,9 +15,7 @@ use App\Http\Middleware\UserAuthenticate;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ApplicationController::class, 'home'])->name('home');
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
@@ -36,8 +34,21 @@ Route::get('order-tracking', [ApplicationController::class, 'orderTracking'])->n
 Route::get('about-us', [ApplicationController::class, 'aboutUs'])->name('about-us');
 Route::get('contact', [ApplicationController::class, 'contact'])->name('contact');
 
-Route::name('user.')->prefix('user')->group(function() {
-    Route::get('my-account', [UserController::class, 'myAccount'])->name('my-account');
-    Route::get('my-cart', [UserController::class, 'myCart'])->name('my-cart');
-    Route::get('my-wishlist', [UserController::class, 'myWishlist'])->name('my-wishlist');
+Route::name('user')->prefix('user')->group(function() {
+    Route::name('.my-account')->prefix('my-account')->group(function() {
+        Route::get('/', [UserController::class, 'myAccount'])->name('');
+    });
+    Route::name('.my-cart')->prefix('my-cart')->group(function() {
+        Route::get('/', [CartItemController::class, 'myCart'])->name('');
+        Route::post('add-to-cart', [CartItemController::class, 'addToCart'])->name('.add-to-cart');
+    });
+    Route::get('my-wishlist', [UserController::class, 'myWishlist'])->name('.my-wishlist');
+});
+
+Route::name('products')->prefix('products')->group(function() {
+    Route::get('single-product', [ProductController::class, 'singleProduct'])->name('.single-product');
+});
+
+Route::name('order-tracking')->prefix('order-tracking')->group(function() {
+    Route::get('order-detail', [OrderDetailController::class, 'orderDetail'])->name('.order-detail');
 });

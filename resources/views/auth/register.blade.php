@@ -102,14 +102,14 @@
                             <div class="row">
                                 <div class="default-form-box col-lg-6">
                                     <label for="password">Password <span>*</span></label>
-                                    <input type="password" class="form-control" value="{{ old('password') }}" id="password" name="password" required>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror  
                                 </div>
                                 <div class="default-form-box col-lg-6">
                                     <label for="retype_password">Retype password <span>*</span></label>
-                                    <input type="password" class="form-control" value="{{ old('retype_password') }}" id="retype_password" name="retype_password" required>
+                                    <input type="password" class="form-control" id="retype_password" name="retype_password" required>
                                     @error('retype_password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror  

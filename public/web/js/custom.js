@@ -604,7 +604,7 @@ $(function () {
             reader.readAsDataURL(input.files[0]);
         }
         else {
-            $('#avatar').attr('src', '/img/team/team1.png');
+            $('#avatar').attr('src', '/web/img/team/team1.png');
         }
     });
 

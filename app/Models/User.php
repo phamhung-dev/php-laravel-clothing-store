@@ -48,4 +48,13 @@ class User extends Authenticatable
         return $this->hasMany(RoleUser::class);
     }
 
+    public function scopeAdmin($query)
+    {
+        return $query->where('is_admin', true);
+    }
+
+    public function scopeUser($query)
+    {
+        return $query->where('is_admin', false);
+    }
 }

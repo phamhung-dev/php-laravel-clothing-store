@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{asset('web/css/animate.min.css')}}">
     <!-- meanmenu css -->
     <link rel="stylesheet" href="{{asset('web/css/meanmenu.min.css')}}">
+
+    @yield('header_optional')
+
     <!-- Style css -->
     <link rel="stylesheet" href="{{asset('web/css/style.css')}}">
     <!-- color css -->
