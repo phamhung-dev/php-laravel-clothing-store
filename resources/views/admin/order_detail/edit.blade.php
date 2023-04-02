@@ -144,7 +144,7 @@
                                                 </td>
                                                 <td class="text-right"><strong>Discount:</strong></td>
                                                 <td class="text-right">
-                                                    @if($orderDetail->Coupon->id == null)
+                                                    @if($orderDetail->coupon_id == null)
                                                     <strong>0</strong>
                                                     @else
                                                     <strong>
