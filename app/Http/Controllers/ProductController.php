@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function singleProduct(Request $request){
         $request->validate([
-            'id' => 'required|integer'
+            'id' => 'required|integer',
         ]);
         $product = Product::active()->find($request->id);
         if($product){

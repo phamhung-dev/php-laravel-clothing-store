@@ -80,7 +80,7 @@
                                                             </span>
                                                         @endif
                                                         <div class="actions">
-                                                            <a onclick="add_to_wishlist({{$product->id}})" class="action wishlist"
+                                                            <a onclick="addToWishlist({{$product->id}})" class="action wishlist"
                                                                 title="Wishlist"><i class="far fa-heart"></i></a>
                                                             <a href="compare.html" class="action compare" title="Compare"><i
                                                                     class="fas fa-exchange-alt"></i></a>
@@ -127,7 +127,7 @@
                                                             </span>
                                                         @endif
                                                         <div class="actions">
-                                                            <a onclick="add_to_wishlist({{$product->id}})" class="action wishlist"
+                                                            <a onclick="addToWishlist({{$product->id}})" class="action wishlist"
                                                                 title="Wishlist"><i class="far fa-heart"></i></a>
                                                             <a href="compare.html" class="action compare" title="Compare"><i
                                                                     class="fas fa-exchange-alt"></i></a>
@@ -192,8 +192,8 @@
                         <div class="instagram_post_slider owl-carousel owl-theme owl-loaded owl-drag">
                             <div class="owl-stage-outer">
                                 <div class="owl-stage"
-                                    style="transform: translate3d(-3993px, 0px, 0px); transition: all 1s ease 0s; wid 8712px;">
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    style="transform: translate3d(-3993px, 0px, 0px); transition: all 1s ease 0s; width: 8712px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -201,7 +201,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -209,7 +209,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -217,7 +217,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -225,7 +225,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -233,7 +233,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -241,7 +241,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -249,7 +249,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -257,7 +257,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -265,7 +265,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -273,7 +273,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -281,7 +281,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item active" style="wid 363px;">
+                                    <div class="owl-item active" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -289,7 +289,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item active" style="wid 363px;">
+                                    <div class="owl-item active" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -297,7 +297,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item active" style="wid 363px;">
+                                    <div class="owl-item active" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -305,7 +305,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item active" style="wid 363px;">
+                                    <div class="owl-item active" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -313,7 +313,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item active" style="wid 363px;">
+                                    <div class="owl-item active" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -321,7 +321,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -329,7 +329,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item" style="wid 363px;">
+                                    <div class="owl-item" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -337,7 +337,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -345,7 +345,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -353,7 +353,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -361,7 +361,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -369,7 +369,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>
@@ -377,7 +377,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="owl-item cloned" style="wid 363px;">
+                                    <div class="owl-item cloned" style="width: 363px;">
                                         <div class="instgram_post">
                                             <a href="#!">
                                                 <i class="fab fa-instagram"></i>

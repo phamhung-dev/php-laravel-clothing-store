@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,8 @@ class ApplicationController extends Controller
     public function products(Request $request)
     {
         $request->validate([
-            'filter' => 'nullable|in:all,newArrival,onSale',
+            'name' => 'nullable|string',
+            'filter' => 'nullable|in:all,newArrival,onSale,pant,shirt',
             'sort' => 'nullable|in:newest,priceLow,priceHigh',
             'page' => 'nullable|integer|min:1',
         ]);
@@ -30,12 +32,21 @@ class ApplicationController extends Controller
         $request->sort = $request->sort ?? 'newest';
         $request->page = $request->page ?? 1;
         $products = Product::active();
+        $products = ($request->name && $request != '') ? $products->whereRaw("lower(name) like '%". strtolower($request->name) ."%'") : $products;
         switch($request->filter){
             case 'newArrival':
                 $products = $products->orderBy('created_at', 'desc');
                 break;
             case 'onSale':
                 $products = $products->where('discount_percent', '>', 0)->orderBy('discount_percent', 'desc');
+                break;
+            case 'pant':
+                $productCategory = ProductCategory::where('name', 'Pant')->first();
+                $products = $products->where('product_category_id', $productCategory->id);
+                break;
+            case 'shirt':
+                $productCategory = ProductCategory::where('name', 'Shirt')->first();
+                $products = $products->where('product_category_id', $productCategory->id);
                 break;
         }
         $price = DB::raw('sell_price * (1 - discount_percent / 100.0)');

@@ -26,6 +26,12 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
     public function showRegisterForm()
     {
         return view('auth.register');

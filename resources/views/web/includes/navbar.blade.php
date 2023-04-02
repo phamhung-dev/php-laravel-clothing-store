@@ -15,7 +15,7 @@
                         <div class="others-option">
                             <div class="option-item">
                                 <div class="wishlist-btn">
-                                    <a onclick="view_cart()" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
+                                    <a onclick="viewCart()" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
                                             class="far fa-heart"></i></a>
                                 </div>
                             </div>
@@ -59,13 +59,13 @@
                     <div class="others-option">
                         <div class="option-item">
                             <div class="wishlist-btn">
-                                <a onclick="view_wishlist()" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
+                                <a onclick="viewWishlist()" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
                                         class="far fa-heart"></i></a>
                             </div>
                         </div>
                         <div class="option-item">
                             <div class="cart-btn">
-                                <a onclick="view_cart()" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
+                                <a onclick="viewCart()" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
                                         class="fas fa-shopping-bag"></i></a>
                             </div>
                         </div>

@@ -34,6 +34,8 @@
                                 <option {{$filter == 'all' ? 'selected' : ''}} value="all">All</option>
                                 <option {{$filter == 'newArrival' ? 'selected' : ''}} value="newArrival">New Arrival</option>
                                 <option {{$filter == 'onSale' ? 'selected' : ''}} value="onSale">On Sale</option>
+                                <option {{$filter == 'pant' ? 'selected' : ''}} value="pant">Pant</option>
+                                <option {{$filter == 'shirt' ? 'selected' : ''}} value="shirt">Shirt</option>
                             </select>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
                                 </span>
                             @endif
                             <div class="actions">
-                                <a onclick="add_to_wishlist({{$product->id}})" class="action wishlist"
+                                <a onclick="addToWishlist({{$product->id}})" class="action wishlist"
                                     title="Wishlist"><i class="far fa-heart"></i></a>
                                 <a href="compare.html" class="action compare" title="Compare"><i
                                         class="fas fa-exchange-alt"></i></a>
@@ -105,7 +107,7 @@
                                 <span aria-hidden="true">«</span>
                             </a>
                         </li>
-                        @for($i = 1; $i < $totalPage; $i++)
+                        @for($i = 1; $i <= $totalPage; $i++)
                             @if($i == $page)
                                 <li class="page-item active"><a class="page-link">{{$i}}</a></li>
                             @else
@@ -142,7 +144,7 @@
             getProducts(filter, null, null);
         });
         $('.page-link').click(function(){
-            var page = $(this).text();
+            var page = $(this).find('span').text();
             if(page == '«')
                 page = '{{$page > 1 ? $page - 1 : 1}}';
             if(page == '»')

@@ -53,4 +53,40 @@ class CartItemController extends Controller
             'message' => $message,
         ]);
     }
+
+    public function myCart(Request $request){
+        $cartItems = CartItem::with('productInventory', 'productInventory.product')->where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $cartItems,
+        ]);
+    }
+
+    public function removeCartItem(Request $request){
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+        $message = 'Not found product.';
+        $status = 404;
+        $productInventory = ProductInventory::find($request->id);
+        if($productInventory){
+            $cartItem = CartItem::where([
+                ['user_id', Auth::user()->id],
+                ['product_inventory_id', $productInventory->id]
+            ])->first();
+            if($cartItem){
+                $cartItem->delete();
+                $message = 'Product removed from your cart.';
+            }
+            else{
+                $message = 'Product is not in your cart.';
+            }
+            $status = 200;
+        }
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ]);
+    }
 }

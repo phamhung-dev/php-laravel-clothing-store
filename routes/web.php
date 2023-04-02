@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ AuthController, ApplicationController, CouponController, OrderDetailController, ProductController, ProductInventoryController, RoleUserController, UserController, CartItemController };
-use App\Http\Middleware\UserAuthenticate;
+use App\Http\Controllers\{ AuthController, ApplicationController, CouponController, OrderDetailController, ProductController, ProductInventoryController, RoleUserController, UserController, CartItemController, WishlistController };
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ Route::get('/', [ApplicationController::class, 'home'])->name('home');
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middleware('authenticate');
 
 Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('register', [AuthController::class, 'register'])->name('register.submit');
@@ -34,15 +33,26 @@ Route::get('order-tracking', [ApplicationController::class, 'orderTracking'])->n
 Route::get('about-us', [ApplicationController::class, 'aboutUs'])->name('about-us');
 Route::get('contact', [ApplicationController::class, 'contact'])->name('contact');
 
-Route::name('user')->prefix('user')->group(function() {
+Route::middleware('authenticate')->name('user')->prefix('user')->group(function() {
     Route::name('.my-account')->prefix('my-account')->group(function() {
         Route::get('/', [UserController::class, 'myAccount'])->name('');
+        Route::post('update-account', [UserController::class, 'updateAccount'])->name('.update-account');
     });
     Route::name('.my-cart')->prefix('my-cart')->group(function() {
-        Route::get('/', [CartItemController::class, 'myCart'])->name('');
+        Route::post('/', [CartItemController::class, 'myCart'])->name('');
         Route::post('add-to-cart', [CartItemController::class, 'addToCart'])->name('.add-to-cart');
+        Route::post('remove-cart-item', [CartItemController::class, 'removeCartItem'])->name('.remove-cart-item');
+        Route::get('checkout', [OrderDetailController::class, 'checkout'])->name('.checkout');
+        Route::post('checkout', [OrderDetailController::class, 'handleCheckout'])->name('.checkout');
+        Route::get('checkout-success', [OrderDetailController::class, 'checkoutSuccess'])->name('.checkout-success');
+        Route::post('apply-coupon', [CouponController::class, 'applyCoupon'])->name('.apply-coupon');
     });
-    Route::get('my-wishlist', [UserController::class, 'myWishlist'])->name('.my-wishlist');
+    Route::name('.my-wishlist')->prefix('my-wishlist')->group(function() {
+        Route::post('/', [WishlistController::class, 'myWishlist'])->name('');
+        Route::post('add-to-wishlist', [WishlistController::class, 'addToWishlist'])->name('.add-to-wishlist');
+        Route::post('remove-wishlist', [WishlistController::class, 'removeWishlist'])->name('.remove-wishlist');
+    });
+    Route::get('order-detail', [OrderDetailController::class, 'userOrderDetail'])->name('.order-detail');
 });
 
 Route::name('products')->prefix('products')->group(function() {

@@ -47,4 +47,8 @@ class CartItem extends Model
         }
         return $keys;
     }
+    public function price(){
+        $product = $this->productInventory()->first()->product()->first();
+        return $this->quantity * $product->sell_price * (1 - $product->discount_percent / 100.0);
+    }
 }

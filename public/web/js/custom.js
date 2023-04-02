@@ -597,7 +597,6 @@ $(function () {
         var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
         if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 $('#avatar').attr('src', e.target.result);
             }
@@ -609,149 +608,158 @@ $(function () {
     });
 
 });
-function open_upload() {
+function openUpload() {
     $('#upload').click();
 }
 
-function view_cart() {
+function viewCart() {
     $.ajax({
-        url: '/user/cart/view-cart',
-        type: 'GET',
+        url: '/user/my-cart',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
         dataType: 'json',
-        success: function(cart) {
-            const formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-            });
-            var total = 0;
-            var html = `<h3>My Cart (${cart.length})</h3>`;
-            html += `<div class="products-cart-content">`;
-            for (var i = 0; i < cart.length; i++) {
-                html += `<div class="products-cart d-flex align-items-center" id="cart-item-${cart[i].productInventoryId}">`;
-                html += `<div class="products-image">`;
-                html += `<a href="/products/single-product/${cart[i].id}"><img src="data:image/png;base64, ${cart[i].image}" alt="image"></a>`;
+        success: function(response) {
+            if(response.status == 200) {
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                });
+                var cart = response.data;
+                var total = 0;
+                var html = `<h3>My Cart (${cart.length})</h3>`;
+                html += `<div class="products-cart-content">`;
+                for (var i = 0; i < cart.length; i++) {
+                    var price = cart[i].product_inventory.product.sell_price * (1 - cart[i].product_inventory.product.discount_percent / 100.0);
+                    html += `<div class="products-cart d-flex align-items-center" id="cart-item-${cart[i].product_inventory_id}">`;
+                    html += `<div class="products-image">`;
+                    html += `<a href="/products/single-product?id=${cart[i].product_inventory.product.id}"><img src="data:image/png;base64, ${cart[i].product_inventory.product.image}" alt="image"></a>`;
+                    html += `</div>`;
+                    html += `<div class="products-content">`;
+                    html += `<h3><a href="/products/single-product?id=${cart[i].product_inventory.product.id}">${cart[i].product_inventory.product.name} - ${cart[i].product_inventory.size} - ${cart[i].product_inventory.color}</a></h3>`;
+                    html += `<div class="products-price">`;
+                    html += `<span>${cart[i].quantity}</span>`;
+                    html += `<span>&nbsp x &nbsp</span>`;
+                    html += `<span class="price">${formatter.format(price)}</span>`;
+                    html += `</div>`;
+                    html += `</div>`;
+                    html += `<a onclick="removeCartItem(${cart[i].product_inventory_id})" class="remove-btn"><i class="fas fa-trash-alt"></i></a>`;
+                    html += `</div>`;
+                    total += price * cart[i].quantity;
+                }
                 html += `</div>`;
-                html += `<div class="products-content">`;
-                html += `<h3><a href="/products/single-product/${cart[i].id}">${cart[i].name}</a></h3>`;
-                html += `<div class="products-price">`;
-                html += `<span>${cart[i].quantity}</span>`;
-                html += `<span>&nbsp x &nbsp</span>`;
-                html += `<span class="price">${formatter.format(cart[i].price)}</span>`;
+                html += `<div class="products-cart-subtotal">`;
+                html += `<span>Subtotal</span>`;
+                html += `<span class="subtotal">${formatter.format(total)}</span>`;
                 html += `</div>`;
-                html += `</div>`;
-                html += `<a onclick="remove_cart_item(${cart[i].productInventoryId})" class="remove-btn"><i class="fas fa-trash-alt"></i></a>`;
-                html += `</div>`;
-                total += cart[i].price * cart[i].quantity;
+                if(cart.length > 0){
+                    html += `<div class="products-cart-btn">`;
+                    html += `<a href="/user/my-cart/checkout" class="theme-btn-one btn-black-overlay btn_md">Checkout</a>`;
+                    html += `</div>`;
+                }
+                $('#cart').html(html);
+                $('#shoppingCartModal').modal('show');
             }
-            html += `</div>`;
-            html += `<div class="products-cart-subtotal">`;
-            html += `<span>Subtotal</span>`;
-            html += `<span class="subtotal">${formatter.format(total)}</span>`;
-            html += `</div>`;
-            if(cart.length > 0){
-                html += `<div class="products-cart-btn">`;
-                html += `<a href="/user/cart/checkout" class="theme-btn-one btn-black-overlay btn_md">Checkout</a>`;
-                html += `</div>`;
-            }
-            $('#cart').html(html);
-            $('#shoppingCartModal').modal('show');
         }
     });
 }
 
-function remove_cart_item(id){
+function removeCartItem(id){
     $.ajax({
-        url: '/user/cart/remove-cart-item',
+        url: '/user/my-cart/remove-cart-item',
         type: 'POST',
         data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
             id: id
         },
         dataType: 'json',
         success: function(response) {
             if(response.status == 200){
-                view_cart();
+                viewCart();
             }
         }
     });
 }
 
-function view_wishlist() {
+function viewWishlist() {
     $.ajax({
-        url: '/user/cart/view-wishlist',
-        type: 'GET',
-        dataType: 'json',
-        success: function(wishlist) {
-            const formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-            });
-            var html = `<h3>My Wishlist (${wishlist.length})</h3>`;
-            html += `<div class="products-cart-content">`;
-            for (var i = 0; i < wishlist.length; i++) {
-                html += `<div class="products-cart d-flex align-items-center" id="cart-item-${wishlist[i].productId}">`;
-                html += `<div class="products-image">`;
-                html += `<a href="/products/single-product/${wishlist[i].productId}"><img src="data:image/png;base64, ${wishlist[i].image}" alt="image"></a>`;
-                html += `</div>`;
-                html += `<div class="products-content">`;
-                html += `<h3><a href="/products/single-product/${wishlist[i].productId}">${wishlist[i].name}</a></h3>`;
-                html += `<div class="products-price">`;
-                html += `<span class="price">${formatter.format(wishlist[i].price)}</span>`;
-                html += `</div>`;
-                html += `</div>`;
-                html += `<a onclick="remove_wishlist_item(${wishlist[i].productId})" class="remove-btn"><i class="fas fa-trash-alt"></i></a>`;
-                html += `</div>`;
-            }
-            html += `</div>`;
-            $('#wishlist').html(html);
-            $('#shoppingWishlistModal').modal('show');
-        }
-    });
-}
-
-function remove_wishlist_item(id){
-    $.ajax({
-        url: '/user/cart/remove-wishlist-item',
+        url: '/user/my-wishlist',
         type: 'POST',
         data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        success: function(response) {
+            if(response.status == 200){
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                });
+                var wishlist = response.data;
+                var html = `<h3>My Wishlist (${wishlist.length})</h3>`;
+                html += `<div class="products-cart-content">`;
+                for (var i = 0; i < wishlist.length; i++) {
+                    html += `<div class="products-cart d-flex align-items-center" id="cart-item-${wishlist[i].product_id}">`;
+                    html += `<div class="products-image">`;
+                    html += `<a href="/products/single-product?id=${wishlist[i].product_id}"><img src="data:image/png;base64, ${wishlist[i].product.image}" alt="image"></a>`;
+                    html += `</div>`;
+                    html += `<div class="products-content">`;
+                    html += `<h3><a href="/products/single-product?id=${wishlist[i].product_id}">${wishlist[i].product.name}</a></h3>`;
+                    html += `<div class="products-price">`;
+                    html += `<span class="price">${formatter.format(wishlist[i].product.sell_price * (1 - wishlist[i].product.discount_percent / 100.0))}</span>`;
+                    html += `</div>`;
+                    html += `</div>`;
+                    html += `<a onclick="removeWishlist(${wishlist[i].product_id})" class="remove-btn"><i class="fas fa-trash-alt"></i></a>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+                $('#wishlist').html(html);
+                $('#shoppingWishlistModal').modal('show');
+            }
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+}
+
+function removeWishlist(id){
+    $.ajax({
+        url: '/user/my-wishlist/remove-wishlist',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
             id: id
         },
         dataType: 'json',
         success: function(response) {
             if(response.status == 200){
-                view_wishlist();
+                viewWishlist();
             }
+        },
+        error: function(response) {
+            console.log(response);
         }
     });
 }
 
-function add_to_wishlist(id){
+function addToWishlist(id){
     $.ajax({
-        url: '/user/cart/add-to-wishlist',
+        url: '/user/my-wishlist/add-to-wishlist',
         type: 'POST',
         data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
             id: id
         },
         dataType: 'json',
         success: function(response) {
             if(response.status == 200){
-                view_wishlist();
+                viewWishlist();
             }
-        }
-    });
-}
-
-function apply_coupon(){
-    $.ajax({
-        url: '/user/cart/apply-coupon',
-        type: 'POST',
-        data: {
-            name: $('#coupon').val()
         },
-        dataType: 'json',
-        success: function(response) {
-            if(response.status == 200){
-                view_cart();
-            }
+        error: function(response) {
+            console.log(response);
         }
     });
 }

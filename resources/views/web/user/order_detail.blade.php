@@ -20,7 +20,7 @@
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
                             <li><i class="fas fa-slash"></i></li>
-                            <li><a href="{{route('order-tracking')}}">Order Tracking</a></li>
+                            <li><a href="{{route('user.my-account')}}">My Account</a></li>
                             <li><i class="fas fa-slash"></i></li>
                             <li class="active">Order Detail</li>
                         </ul>
@@ -107,7 +107,7 @@
                                     </tbody>
                                 </table>
                                 <div class="row text-right mt-5">
-                                    <a href="{{route('order-tracking')}}" class="theme-btn-one"><i class="fa fa-arrow-left"></i> Back to order tracking</a>
+                                    <a href="{{route('user.my-account')}}" class="theme-btn-one"><i class="fa fa-arrow-left"></i> Back to order tracking</a>
                                 </div>
                             </div>
                         </div>
