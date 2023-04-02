@@ -11054,7 +11054,11 @@ textarea.form-control-lg {
 .ec-cat-form .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
   color: #777;
 }
-
+.cat-thumb {
+  width: 45px;
+  height: 45px;
+  border-radius: 15px;
+}
 .ec-cat-list .cat-thumb {
   width: 45px;
   height: 45px;

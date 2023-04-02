@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ AuthController, ApplicationController, UserController };
+use App\Http\Controllers\{ AuthController, ApplicationController, CouponController, OrderDetailController, ProductController, ProductInventoryController, RoleUserController, UserController };
 use App\Http\Middleware\UserAuthenticate;
 
 /*
@@ -40,4 +40,26 @@ Route::name('user.')->prefix('user')->group(function() {
     Route::get('my-account', [UserController::class, 'myAccount'])->name('my-account');
     Route::get('my-cart', [UserController::class, 'myCart'])->name('my-cart');
     Route::get('my-wishlist', [UserController::class, 'myWishlist'])->name('my-wishlist');
+});
+
+Route::name('admin.')->prefix('admin')->group(function() {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
+    Route::get('/coupon/create', [CouponController::class, 'showCreateForm'])->name('coupon.create');
+    Route::post('/coupon/create', [CouponController::class, 'create'])->name('coupon.create.submit');
+    Route::get('/coupon/{coupon}/edit', [CouponController::class, 'edit'])->name('coupon.edit');
+
+    Route::get('/user', [UserController::class, 'showUsers'])->name('user');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('product');
+    Route::get('/product/create', [ProductController::class, 'showFormCreate'])->name('product.create');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+
+    Route::get('/inventory', [ProductInventoryController::class, 'index'])->name('inventory');
+    Route::get('/inventory/create', [ProductInventoryController::class, 'showFormCreate'])->name('inventory.create');
+
+    Route::get('/order-detail', [OrderDetailController::class, 'index'])->name('order');
+
+    Route::get('/role', [RoleUserController::class, 'index'])->name('role');
+    Route::get('/role/create', [RoleUserController::class, 'showFormCreate'])->name('role.create');
 });
