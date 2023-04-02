@@ -57,17 +57,17 @@
                                     <li class="has-sub">
                                         <a class="sidenav-item-link" href="javascript:void(0)">
                                             <i class="mdi mdi-account-multiple-outline"></i>
-                                            <span class="nav-text">User</span> <b class="caret"></b>
+                                            <span class="nav-text">Admin user</span> <b class="caret"></b>
                                         </a>
                                         <div class="collapse">
                                             <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
                                                 <li class="">
                                                     <a class="sidenav-item-link" href="/admin/admin-user">
-                                                        <span class="nav-text">Admin user List</span>
+                                                        <span class="nav-text">Admin list</span>
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="sidenav-item-link" href="/admin/admin-user/add">
+                                                    <a class="sidenav-item-link" href="/admin/admin-user/create">
                                                         <span class="nav-text">Add new</span>
                                                     </a>
                                                 </li>

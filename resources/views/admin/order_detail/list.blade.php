@@ -19,17 +19,16 @@
                     <span><i class="mdi mdi-chevron-right"></i></span>Order Details
                 </p>
             </div>
-            <div>
-                <a href="/admin/coupon/add" class="btn btn-primary"> Add new</a>
-            </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card card-default">
                     <div class="card-body">
+                        @if (session('error'))
+                        <div class="alert alert-danger text-center">{{ session('error') }}</div>
+                        @endif
                         <div class="">
                             <div id="responsive-data-table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-
                                 <table id="responsive-data-table" class="table dataTable no-footer" style="width:100%" aria-describedby="responsive-data-table_info">
                                     <thead>
                                         <tr>
@@ -49,7 +48,7 @@
                                         <tr class="odd">
                                             <td class="sorting_1">{{$orderDetail->id}}</td>
                                             <td>{{$orderDetail->User->first_name.' '.$orderDetail->User->last_name}}</td>
-                                            <td>${{number_format($orderDetail->total)}}</td>
+                                            <td>@money($orderDetail->total)</td>
                                             <td>{{$orderDetail->Coupon->discount_percent}}%</td>
                                             <td>{{$orderDetail->Payment->name}}</td>
                                             <td>{{$orderDetail->telephone}}</td>
@@ -64,7 +63,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group mb-1">
-                                                    <a href="#" class="btn btn-outline-success">Info</a>
+                                                    <a href="{{ route('admin.order.edit', ['id' => $orderDetail->id]) }}" class="btn btn-outline-success">Info</a>
                                                 </div>
                                             </td>
                                         </tr>

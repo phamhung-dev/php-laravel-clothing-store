@@ -50,11 +50,11 @@ class User extends Authenticatable
 
     public function scopeAdmin($query)
     {
-        return $query->where('is_admin', true);
+        return $query->where('is_admin', 1);
     }
 
     public function scopeUser($query)
     {
-        return $query->where('is_admin', false);
+        return $query->where('is_admin', 0);
     }
 }

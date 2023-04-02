@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form method="POST" action="/admin/role/create/submit" class="row g-3" enctype="multipart/form-data">
+                        <form method="POST" action="/admin/inventory/create" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             <div class="col-lg-8">
                                 <div class="ec-vendor-upload-detail">
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="size" class="form-label">Color</label>
-                                            <input type="text" class="form-control" placeholder="color" value="{{ old('color') }}" name="size" >
+                                            <input type="text" class="form-control" placeholder="color" value="{{ old('color') }}" name="color" >
                                             @error('color')
                                             <p class="text-danger">{{ $message }}</p>
                                             @enderror

@@ -64,7 +64,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group mb-1">
-                                                    <a href="#" class="btn btn-outline-success">Edit</a>
+                                                    <a href="{{ route('admin.inventory.edit', ['id' => $productInventory->id]) }}" class="btn btn-outline-success">Edit</a>
                                                 </div>
                                             </td>
                                         </tr>

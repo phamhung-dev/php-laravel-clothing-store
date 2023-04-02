@@ -28,7 +28,11 @@
                 </div>
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form method="POST" action="/admin/product/create" class="row g-3" enctype="multipart/form-data">
+                        @if ($errors->any())
+                        <div class="alert alert-danger text-center">{{ $errors->first() }}</div>
+                        @endif
+                        <form method="POST" action="{{route('admin.product.update',$product->id)}}" class="row g-3" enctype="multipart/form-data">
+                            @csrf
                             <div class="col-lg-8">
                                 <div class="ec-vendor-upload-detail">
                                     <div class="row g-3">
@@ -119,8 +123,7 @@
                                         <div class="col-md-12">
                                             <div class="product_add_cancel_button">
                                                 <button type="submit" class="btn btn-border">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Add
-                                                    product</button>
+                                                <button type="submit" class="btn btn-primary">Update</button>
                                             </div>
                                         </div>
                                     </div>
@@ -130,12 +133,12 @@
                                 <div class="ec-vendor-img-upload">
                                     <div class="ec-vendor-main-img">
                                         <label class="form-check-label">Image upload</label>
-                                        @error('upload_image')
+                                        @error('image_upload')
                                         <p class="text-danger">{{ $message }}</p>
                                         @enderror>
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
-                                                <input type="file" id="uploadImage" class="ec-image-upload" accept=".png, .jpg, .jpeg">
+                                                <input type="file" id="uploadImage" class="ec-image-upload" accept="image/*" name="image_upload">
                                                 <label for="uploadImage"><img src="https://andit.co/projects/html/andshop/andshop-dashboard/assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit"></label>
                                             </div>
                                             <div class="avatar-preview ec-preview">
@@ -149,12 +152,12 @@
                                             </div>
                                         </div>
                                         <label class="form-check-label">Image upload hover</label>
-                                        @error('upload_image_hover')
+                                        @error('image_hover_upload')
                                         <p class="text-danger">{{ $message }}</p>
                                         @enderror>
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
-                                                <input type="file" id="uploadImageHover" class="ec-image-upload" name="upload_image_hover" accept=".png, .jpg, .jpeg">
+                                                <input type="file" id="uploadImageHover" class="ec-image-upload" name="image_hover_upload" accept="image/*">
                                                 <label for="uploadImageHover"><img src="https://andit.co/projects/html/andshop/andshop-dashboard/assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit"></label>
                                             </div>
                                             <div class="avatar-preview ec-preview">

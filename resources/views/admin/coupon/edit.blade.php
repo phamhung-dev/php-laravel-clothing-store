@@ -30,8 +30,12 @@
                 </div>
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form method="POST" action="{{route('admin.coupon')}}" class="row g-3" enctype="multipart/form-data">
+                        @if (session('error'))
+                        <div class="alert alert-danger text-center">{{ session('error') }}</div>
+                        @endif
+                        <form method="POST" action="{{route('admin.coupon.update',$coupon->id)}}" class="row g-3" enctype="multipart/form-data">
                             @csrf
+
                             <div class="col-lg-8">
                                 <div class="ec-vendor-upload-detail">
                                     <div class="row g-3">
