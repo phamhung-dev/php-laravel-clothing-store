@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\OrderDetail;
+use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\User;
 
@@ -30,5 +30,13 @@ class OrderDetailController extends Controller
         return redirect()->back()->withErrors([
             'error' => 'No order detail found.'
         ]);
+    }
+    public function index(){
+        $orderDetails = OrderDetail::with('User')
+        ->with('Coupon')
+        ->with('Payment')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('admin.order_detail.list', compact('orderDetails'));
     }
 }
